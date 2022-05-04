@@ -1,0 +1,10 @@
+oslo.serialization==2.4.0
+oslo.config==3.9.0
+oslo.utils==3.7.0
+six==1.9.0
+gevent==1.1.2
+Flask==0.10.1
+SQLAlchemy==1.0.11
+redis==2.10.3
+jsonschema==2.3.0
+PyMySQL==0.6.7
