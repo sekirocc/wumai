@@ -18,7 +18,7 @@ routes = {
 }
 ```
 
-### step 2. setup app_root and log_dir, 
+### step 2. setup app_root and log_dir,
 
 ```
 from wumai import config
@@ -39,7 +39,7 @@ api.route(routes)
 api.start(port=8080)
 ```
 
-## Detail
+## Details
 
 
 ### Server Types
@@ -74,7 +74,7 @@ spawn a greenlet to execute each of these jobs.
 
 ### Configuration
 
-Settings in `wumai` must be set to a global variable `CONF` in `wumai.config` module. 
+Settings in `wumai` must be set to a global variable `CONF` in `wumai.config` module.
 You can modify this var directly, but invoke its `apply` api is recommended.
 
 ```
@@ -96,13 +96,13 @@ There are some configs, but is not required to use `wumai`.
 If you use models shipped with `wumai`, you should config database to let `wumai` to access for
 mapping db records to models.
 
-| name | os env name | default |
-| ---- | ----------- | ------- |
-| host | DB_HOST  | None  |
-| port | DB_PORT  | 3306  |
-| user | DB_USER  | None  |
-| password | DB_PASSWORD  | None  |
-| database | DB_DATABASE  | None  |
+| name     | os env name | default |
+|----------|-------------|---------|
+| host     | DB\_HOST    | None    |
+| port     | DB\_PORT    | 3306    |
+| user     | DB\_USER    | None    |
+| password | DB_PASSWORD | None    |
+| database | DB_DATABASE | None    |
 
 
 #### Worker config
@@ -118,12 +118,12 @@ By default setting:
 
 `create_worker(pick_size, exec_size, exec_timeout, gevent)`
 
-| name | description | default |
-| ---- | ----------- | ------- |
-| pick_size | how many job to pick from db every loop(2 seconds) | 10 |
-| exec_size | worker threads running pool size | 10 |
-| exec_timeout | every job execution timeout | 600 |
-| gevent | the worker thread is using geventlet | True |
+| name          | description                                        | default |
+|---------------|----------------------------------------------------|---------|
+| pick\_size    | how many job to pick from db every loop(2 seconds) | 10      |
+| exec\_size    | worker threads running pool size                   | 10      |
+| exec\_timeout | every job execution timeout                        | 600     |
+| gevent        | the worker thread is using geventlet               | True    |
 
 Note:
     by now, gevent is the only thread manager. so make sure pass `gevent=True` to `create_worker`.
@@ -157,21 +157,21 @@ Note:
 
 table_name: `job`
 
-| field name | type |
-| ---- | ---- |
-| id |  varchar(32) |
-| project_id | string(32) |
-| action | string(50) |
-| status | string(10) (enum: running, pending, finished, error)|
-| error | text |
-| result | text |
-| params | text |
-| updated | datetime |
-| created | datetime |
-| run_at | datetime |
-| try_period | integer |
-| try_max | integer |
-| trys | integer |
+| field name  | type                                                 |
+|-------------|------------------------------------------------------|
+| id          | varchar(32)                                          |
+| project\_id | string(32)                                           |
+| action      | string(50)                                           |
+| status      | string(10) (enum: running, pending, finished, error) |
+| error       | text                                                 |
+| result      | text                                                 |
+| params      | text                                                 |
+| updated     | datetime                                             |
+| created     | datetime                                             |
+| run\_at     | datetime                                             |
+| try\_period | integer                                              |
+| try\_max    | integer                                              |
+| trys        | integer                                              |
 
 #### operation model
 
@@ -213,11 +213,11 @@ logs are stored in file, rotated by day.
 
 every server(api, worker) has three kinds of logs, they are
 
-| type | file | description |
-| -----| ---- | ------|
-| normal | normal.log  | app logger, the default logger used by your app. |
-| access | access.log  | framework level logger, log user access, not controlled by your app.  |
-| db | db.log  | framework level logger, log sql activities. |
+| type   | file       | description                                                          |
+|--------|------------|----------------------------------------------------------------------|
+| normal | normal.log | app logger, the default logger used by your app.                     |
+| access | access.log | framework level logger, log user access, not controlled by your app. |
+| db     | db.log     | framework level logger, log sql activities.                          |
 
 most time, when you get logger from framework, you get the normal log.
 
@@ -275,24 +275,24 @@ contruct response to user with relative error code and message.
 
 in your app, you can raise these supported exceptions.
 
-| exception name | error code  |
-| ----- | ---- |
-|iaas_error.IaasProviderActionError | 5001 |
-|iaas_error.ActionsPartialSuccessError | 5001 / 5002 |
-|iaas_error.InvalidRequestParameter | 4100 |
-|iaas_error.ResourceNotFound | 4104 |
-|iaas_error.ResourceNotBelongsToProject | 4103 |
-|iaas_error.ResourceActionForbiden |4105  |
-|iaas_error.ResourceActionUnsupported | 4106 |
-|iaas_error.ResourceIsBusy | 4105 |
-|project_error.ResourceQuotaNotEnough | 4113 |
-|project_error.ProjectDuplicated | 4600 |
-|project_error.ProjectNotFound | 4604 |
-|project_error.AccessKeyExpired | 4101 |
-|project_error.AccessKeyInvalid | 4101 |
-|project_error.ManageAccessKeyInvalid | 4601 |
-|project_error.AccessKeyNotFound | 4614 |
-|project_error.AccessKeyDuplicated | 4611 |
+| exception name                          | error code  |
+|-----------------------------------------|-------------|
+| iaas\_error.IaasProviderActionError     | 5001        |
+| iaas\_error.ActionsPartialSuccessError  | 5001 / 5002 |
+| iaas\_error.InvalidRequestParameter     | 4100        |
+| iaas\_error.ResourceNotFound            | 4104        |
+| iaas\_error.ResourceNotBelongsToProject | 4103        |
+| iaas\_error.ResourceActionForbiden      | 4105        |
+| iaas\_error.ResourceActionUnsupported   | 4106        |
+| iaas\_error.ResourceIsBusy              | 4105        |
+| project\_error.ResourceQuotaNotEnough   | 4113        |
+| project\_error.ProjectDuplicated        | 4600        |
+| project\_error.ProjectNotFound          | 4604        |
+| project\_error.AccessKeyExpired         | 4101        |
+| project\_error.AccessKeyInvalid         | 4101        |
+| project\_error.ManageAccessKeyInvalid   | 4601        |
+| project\_error.AccessKeyNotFound        | 4614        |
+| project\_error.AccessKeyDuplicated      | 4611        |
 
 
 
@@ -325,39 +325,39 @@ there are too kinds of model pre-defined:
 * Resource model
 
 Job model is used by worker server, so when worker server starts, it will check `job` table
-and try to fetch data from the table, and feed jobs in to Job model, which should has the 
+and try to fetch data from the table, and feed jobs in to Job model, which should has the
 following structure:
 
-| field name | type |
-| ---- | ---- |
-| id |  varchar(32) |
-| project_id | string(32) |
-| action | string(50) |
-| status | string(10) (enum: running, pending, finished, error)|
-| error | text |
-| result | text |
-| params | text |
-| updated | datetime |
-| created | datetime |
-| run_at | datetime |
-| try_period | integer |
-| try_max | integer |
-| trys | integer |
+| field name     | type                                                 |
+|----------------|------------------------------------------------------|
+| id             | varchar(32)                                          |
+| project\_error | string(32)                                           |
+| action         | string(50)                                           |
+| status         | string(10) (enum: running, pending, finished, error) |
+| error          | text                                                 |
+| result         | text                                                 |
+| params         | text                                                 |
+| updated        | datetime                                             |
+| created        | datetime                                             |
+| run\_at        | datetime                                             |
+| try\_period    | integer                                              |
+| try\_max       | integer                                              |
+| trys           | integer                                              |
 
 Resource model, on the contrast, is just a regular base class for resources (Instance,
 for example), which provides handy methods you may use for your logic, such as:
 
 * `must_belongs_project(project_id)` a method raise exception if the resource doesnot belongs
-to the project.  
+to the project.
 * `is_busy()` return True if current resource is ended with `-ing`
 
 If you have a model and decided to subclass this Resource model, the database table correponding
 to model should at least has the following fields:
 
-| field name | type |
-| ---- | ---- |
-| id |  varchar(32) |
-| project_id | string(32) |
-| status | string(10) |
+| field name  | type        |
+|-------------|-------------|
+| id          | id(32) |
+| project\_id | string(32)  |
+| status      | string(10)  |
 
 these fields are used by those handy methods above. so make sure they exists before using them.
